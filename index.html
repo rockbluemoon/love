@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="index.js"></script>
-
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-    ></script>
-    <script type="text/javascript">
-      (function () {
-        emailjs.init("NOasfkDE3G7X209Gk");
-      })();
-    </script>
+    <style>
+        .button {
+          border: #0a0a0a;
+          color: rgb(255, 255, 255);
+          padding: 30px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 20px;
+          margin: 5px 20px;
+          cursor: pointer;
+          font-style: italic;
+        }
+        
+        .button1 {background-color: #04AA6D;} /* Green */
+        .button2 {background-color: #ba0000;} /* Red */
+    </style>        
 </head>
 <body style="background-color: rgba(252, 148, 179, 0.5);">
     <p style="font-family: 'arial, sans-serif'; font-size: 20px;">
@@ -25,24 +31,44 @@
     </p>
     <br>
     <p style="font-family: 'italic'; font-size: 30px;">Will you go on a date with me?</p>
-    <div class="container border mt-3 bg-light">
-          <div class="col-md-6 border-left py-3">
-            <div class="form-group">
-              <h4 for="name">Name</h4>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder="Enter name"
-              />
-            </div>
-            <div class="form-group">
-              <h3 for="message">your reply</h3>
-              <textarea class="form-control" id="message" rows="3"></textarea>
-            </div>
-            <button class="btn btn-primary" onclick="sendMail()">Submit</button>
-          </div>
-        </div>
-      </div>
+
+    <button class="button button1" onclick="trackClick('YES')">YES</button>
+    <a href="https://youtube.com/shorts/798b71UoiFo?si=AcJkC74yYCJDKrVa">
+        <button class="button button2" onclick="trackClick('NO')">NO</button>
+    </a>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("arvindkatariya7189@gmail.com"); // Replace with your EmailJS User ID
+        })();
+
+        function trackClick(response) {
+            // Log the result of the click (YES or NO)
+            console.log("User clicked: " + response);
+            
+            // Show an alert to the user with their response
+            alert("You clicked: " + response);
+
+            // Send the response via EmailJS
+            const templateParams = {
+                user_response: response,  // the user's response (YES or NO)
+                user_email: "arvindkatariya127@gmail.com"  // The email address where to send the email
+            };
+
+            // Send email using EmailJS
+            emailjs.send('service_hc2eja1', 'template_ryws5fc', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                }, function(error) {
+                    console.log('Error sending email:', error);
+                });
+
+            // If it's the "YES" button, open the dialer
+            if (response === 'YES') {
+                window.open('tel://7976876593');
+            }
+        }
+    </script>
 </body>
-</html
+</html>
